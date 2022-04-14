@@ -1,0 +1,273 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 764
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object BindNavigator1: TBindNavigator
+    Align = Bottom
+    Position.Y = 455.000000000000000000
+    Size.Width = 764.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    DataSource = BindSourceDB2
+    xRadius = 4.000000000000000000
+    yRadius = 4.000000000000000000
+  end
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 764.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 8
+    object Button1: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 1
+      Text = 'Fetch'
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Position.X = 96.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 0
+      Text = 'Save'
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Position.X = 192.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 121.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Change Count'
+      OnClick = Button3Click
+    end
+  end
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 764.000000000000000000
+    Size.Height = 405.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 1
+    TabOrder = 19
+    TabPosition = PlatformDefault
+    Sizes = (
+      764s
+      379s
+      764s
+      379s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 69.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem1'
+      ExplicitSize.cx = 69.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object StringGrid1: TStringGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 764.000000000000000000
+        Size.Height = 379.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowCount = 0
+        Viewport.Width = 760.000000000000000000
+        Viewport.Height = 354.000000000000000000
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 69.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem2'
+      ExplicitSize.cx = 69.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Memo1: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Top
+        Position.Y = 17.000000000000000000
+        Size.Width = 764.000000000000000000
+        Size.Height = 72.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Viewport.Width = 760.000000000000000000
+        Viewport.Height = 68.000000000000000000
+      end
+      object Label1: TLabel
+        Align = Top
+        Size.Width = 764.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Post Response'
+        TabOrder = 3
+      end
+      object Label2: TLabel
+        Align = Top
+        Position.Y = 89.000000000000000000
+        Size.Width = 764.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Post Update Body'
+        TabOrder = 2
+      end
+      object MemoPostBody: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Top
+        Position.Y = 106.000000000000000000
+        Size.Width = 764.000000000000000000
+        Size.Height = 72.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 760.000000000000000000
+        Viewport.Height = 68.000000000000000000
+      end
+    end
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 28
+    Top = 357
+    object LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      GridControl = StringGrid1
+      Columns = <>
+    end
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'http://localhost:8080'
+    Params = <>
+    Left = 136
+    Top = 88
+  end
+  object RESTRequestGet: TRESTRequest
+    AssignedValues = [rvConnectTimeout, rvReadTimeout]
+    Client = RESTClient1
+    Params = <>
+    Resource = 'data/tasks/'
+    Response = RESTResponseGet
+    Left = 136
+    Top = 136
+  end
+  object RESTResponseGet: TRESTResponse
+    ContentType = 'application/json'
+    Left = 136
+    Top = 192
+  end
+  object RESTResponseDataSetAdapterGet: TRESTResponseDataSetAdapter
+    Active = True
+    Dataset = FDMemTable1
+    FieldDefs = <>
+    Response = RESTResponseGet
+    StringFieldSize = 50
+    Left = 136
+    Top = 248
+  end
+  object FDMemTable1: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'ID'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'FIRST_NAME'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'LAST_NAME'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'EMAIL'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'DATE'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'SUBJECT'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'UNREAD'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'DRAFT'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'SENT'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'STARRED'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'OUTGOING'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'MESSAGE'
+        DataType = ftWideString
+        Size = 50
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 272
+    Top = 312
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = FDMemTable1
+    ScopeMappings = <>
+    Left = 272
+    Top = 368
+  end
+end
